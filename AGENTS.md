@@ -44,8 +44,9 @@ The first concrete image contract is the Codex Kubernetes runtime image.
 - Entrypoint: `docker/codex-entrypoint.sh`
 - Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
 - Codex CLI package: `@openai/codex@0.133.0`
-- Canonical image tag: `v0.3.6-codex-0.133.0-r1`
-- Published image name: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r1`
+- Runtime sandbox package: Alpine `bubblewrap`
+- Canonical image tag: `v0.3.6-codex-0.133.0-r2`
+- Published image name: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2`
 
 The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
 

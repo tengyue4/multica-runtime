@@ -16,7 +16,7 @@ permissions:
 
 env:
   IMAGE_NAME: multica-runtime-codex
-  IMAGE_TAG: v0.3.6-codex-0.133.0-r1
+  IMAGE_TAG: v0.3.6-codex-0.133.0-r2
 
 jobs:
   publish:
