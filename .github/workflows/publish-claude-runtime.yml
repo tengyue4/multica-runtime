@@ -1,13 +1,13 @@
-name: Publish Codex Runtime
+name: Publish Claude Runtime
 
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/publish-codex-runtime.yml"
-      - "docker/codex.Dockerfile"
-      - "docker/codex-entrypoint.sh"
+      - ".github/workflows/publish-claude-runtime.yml"
+      - "docker/claude.Dockerfile"
+      - "docker/claude-entrypoint.sh"
   workflow_dispatch:
 
 permissions:
@@ -15,8 +15,8 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: multica-runtime-codex
-  IMAGE_TAG: v0.3.6-codex-0.133.0-r1
+  IMAGE_NAME: multica-runtime-claude
+  IMAGE_TAG: v0.3.6-claude-2.1.150-r1
 
 jobs:
   publish:
@@ -49,13 +49,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/codex.Dockerfile
+          file: docker/claude.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.image.outputs.image }}:${{ env.IMAGE_TAG }}
           labels: |
-            org.opencontainers.image.title=Multica Codex Runtime
-            org.opencontainers.image.description=Codex-first Multica daemon runtime image for Kubernetes-hosted agents
+            org.opencontainers.image.title=Multica Claude Runtime
+            org.opencontainers.image.description=Claude Code-first Multica daemon runtime image for Kubernetes-hosted agents
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.version=${{ env.IMAGE_TAG }}

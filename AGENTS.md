@@ -18,8 +18,11 @@ The intended direction is an agent CLI runtime: preinstalled AI coding CLIs plus
 multica-runtime/
 ├── .github/
 │   └── workflows/
+│       ├── publish-claude-runtime.yml
 │       └── publish-codex-runtime.yml
 ├── docker/
+│   ├── claude.Dockerfile
+│   ├── claude-entrypoint.sh
 │   ├── codex.Dockerfile
 │   └── codex-entrypoint.sh
 ├── docs/
@@ -46,7 +49,22 @@ The first concrete image contract is the Codex Kubernetes runtime image.
 
 The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
 
+### Claude Runtime
+
+The second concrete image contract is the Claude Code Kubernetes runtime image.
+
+- Dockerfile: `docker/claude.Dockerfile`
+- Entrypoint: `docker/claude-entrypoint.sh`
+- Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
+- Claude Code CLI package: `@anthropic-ai/claude-code@2.1.150`
+- Canonical image tag: `v0.3.6-claude-2.1.150-r1`
+- Published image name: `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1`
+
+The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
+
 Do not add Kubernetes manifests, additional runtime images, new publish tags, or moving tags such as `latest` unless the image scope and release policy are explicitly updated.
+
+Each runtime image has its own publish workflow. Runtime publish workflows must only trigger for changes to that runtime's Dockerfile, entrypoint, or workflow file; documentation-only changes must not publish images.
 
 ## Required Git Workflow for All Changes
 
