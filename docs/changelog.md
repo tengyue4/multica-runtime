@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-05-25 - Codex Runtime Bubblewrap Patch
+
+- Added Alpine `bubblewrap` to the Codex runtime image so Codex can find the Linux sandbox helper on `PATH`.
+- Bumped the Codex image tag to `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2`.
+- Updated Codex build, smoke-test, runbook, and ADR documentation for the distro-managed sandbox helper.
+
 ## 2026-05-25 - Claude Runtime Image Scaffold
 
 - Added a Claude Code runtime image contract for Kubernetes-hosted Multica daemon runtimes.

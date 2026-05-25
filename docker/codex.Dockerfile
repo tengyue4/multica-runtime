@@ -9,6 +9,7 @@ LABEL org.opencontainers.image.source="https://github.com/tengyue4/multica-runti
 
 RUN apk add --no-cache \
     bash \
+    bubblewrap \
     ca-certificates \
     git \
     nodejs \
