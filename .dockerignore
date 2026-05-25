@@ -1,0 +1,14 @@
+.git
+.github
+.DS_Store
+docker-compose*.yml
+node_modules
+npm-debug.log*
+coverage
+dist
+build
+tmp
+.cache
+.env
+.env.*
+!.env.example

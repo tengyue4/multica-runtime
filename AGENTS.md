@@ -16,14 +16,37 @@ The intended direction is an agent CLI runtime: preinstalled AI coding CLIs plus
 
 ```text
 multica-runtime/
+├── .github/
+│   └── workflows/
+│       └── publish-codex-runtime.yml
+├── docker/
+│   ├── codex.Dockerfile
+│   └── codex-entrypoint.sh
 ├── docs/
+│   ├── adr/
+│   ├── runbooks/
 │   └── changelog.md
 ├── README.md
 ├── AGENTS.md
 └── CLAUDE.md -> AGENTS.md
 ```
 
-Dockerfiles, GitHub Actions workflows, image tagging, and publishing policy are intentionally not defined yet. Add those only when the first Multica runtime image contract is concrete.
+## Runtime Images
+
+### Codex Runtime
+
+The first concrete image contract is the Codex Kubernetes runtime image.
+
+- Dockerfile: `docker/codex.Dockerfile`
+- Entrypoint: `docker/codex-entrypoint.sh`
+- Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
+- Codex CLI package: `@openai/codex@0.133.0`
+- Canonical image tag: `v0.3.6-codex-0.133.0-r1`
+- Published image name: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r1`
+
+The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
+
+Do not add Kubernetes manifests, additional runtime images, new publish tags, or moving tags such as `latest` unless the image scope and release policy are explicitly updated.
 
 ## Required Git Workflow for All Changes
 
@@ -32,19 +55,18 @@ These steps must be included in every implementation plan unless explicitly told
 - Create a feature branch from `main` using the `codex/` prefix
   - Example: `git checkout -b codex/<short-feature-name>`
 - Keep commits focused and action-oriented
-  - Example: `add runtime image bootstrap guidance`
+  - Example: `add codex runtime image scaffold`
 - Do not bundle unrelated refactors with the main change
 - Open a PR with a short summary and explicit test or validation notes
   - Example: `gh pr create --fill`
 
 ## Image Planning Guidance
 
-Until the first image contract is defined:
-
-- Do not add Dockerfiles, build workflows, publish jobs, versioning policy, or registry tags without an explicit image scope.
 - Keep documentation centered on Multica runtime images for Kubernetes-hosted agents.
 - Prefer reusable runtime concerns such as shell environment, agent CLI configuration, Kubernetes access, GitOps tooling, and persistent config paths.
 - Keep browser IDE, editor server, and workspace UI assumptions out of this repository.
+- Put Dockerfiles under `docker/` because this repository may host multiple runtime images later.
+- Keep image tags explicit and immutable unless an ADR changes the release policy.
 
 ## Documentation Standards
 
