@@ -18,6 +18,12 @@ Build the Claude image from `ghcr.io/multica-ai/multica-backend:v0.3.6`, install
 ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
 ```
 
+The `r2` image revision keeps the same Multica and Claude Code versions and adds Alpine `github-cli` so `gh` is available without baking any GitHub authentication into the image:
+
+```text
+ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
+```
+
 Use an explicit immutable tag that includes the Multica version, Claude Code version, and image revision. Do not publish `latest`.
 
 Keep a separate Claude publish workflow that triggers only when the Claude Dockerfile, Claude entrypoint, or Claude workflow changes.
@@ -28,4 +34,5 @@ Keep a separate Claude publish workflow that triggers only when the Claude Docke
 - Operators can see the key runtime compatibility versions from the tag.
 - Codex changes do not publish Claude images, and Claude changes do not publish Codex images.
 - Documentation-only changes do not publish images.
+- GitHub CLI auth remains runtime/user-managed; the image only provides the `gh` binary.
 - Moving tags and Kubernetes manifests remain out of scope until a later release decision.

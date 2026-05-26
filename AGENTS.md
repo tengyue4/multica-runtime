@@ -45,8 +45,9 @@ The first concrete image contract is the Codex Kubernetes runtime image.
 - Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
 - Codex CLI package: `@openai/codex@0.133.0`
 - Runtime sandbox package: Alpine `bubblewrap`
-- Canonical image tag: `v0.3.6-codex-0.133.0-r2`
-- Published image name: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2`
+- GitHub CLI package: Alpine `github-cli`
+- Canonical image tag: `v0.3.6-codex-0.133.0-r3`
+- Published image name: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3`
 
 The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
 
@@ -58,8 +59,9 @@ The second concrete image contract is the Claude Code Kubernetes runtime image.
 - Entrypoint: `docker/claude-entrypoint.sh`
 - Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
 - Claude Code CLI package: `@anthropic-ai/claude-code@2.1.150`
-- Canonical image tag: `v0.3.6-claude-2.1.150-r1`
-- Published image name: `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1`
+- GitHub CLI package: Alpine `github-cli`
+- Canonical image tag: `v0.3.6-claude-2.1.150-r2`
+- Published image name: `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2`
 
 The image must run as the non-root `multica` user and must not bake runtime secrets into the image. Runtime secrets belong in Kubernetes, Vault, or an equivalent runtime secret source.
 

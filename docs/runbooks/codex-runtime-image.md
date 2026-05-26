@@ -9,7 +9,7 @@ From the repository root:
 ```sh
 docker build \
   -f docker/codex.Dockerfile \
-  -t ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 .
+  -t ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 .
 ```
 
 ## Smoke Test
@@ -17,25 +17,31 @@ docker build \
 Verify the Multica CLI:
 
 ```sh
-docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 version
+docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 version
 ```
 
 Verify the Codex CLI:
 
 ```sh
-docker run --rm --entrypoint codex ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 --version
+docker run --rm --entrypoint codex ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
 ```
 
 Verify the Codex sandbox helper:
 
 ```sh
-docker run --rm --entrypoint bwrap ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 --version
+docker run --rm --entrypoint bwrap ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
+```
+
+Verify the GitHub CLI:
+
+```sh
+docker run --rm --entrypoint gh ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
 ```
 
 Verify required environment validation:
 
 ```sh
-docker run --rm ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2
+docker run --rm ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3
 ```
 
 The container should exit before daemon startup and report the first missing required environment variable.
@@ -47,7 +53,7 @@ The GitHub Actions workflow publishes on pushes to `main` that affect the image,
 The published image is:
 
 ```text
-ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2
+ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3
 ```
 
 The workflow uses `GITHUB_TOKEN` for GHCR authentication and does not require runtime secrets.

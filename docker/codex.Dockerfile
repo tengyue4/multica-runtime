@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     bubblewrap \
     ca-certificates \
     git \
+    github-cli \
     nodejs \
     npm \
     openssh-client \

@@ -16,7 +16,7 @@ permissions:
 
 env:
   IMAGE_NAME: multica-runtime-claude
-  IMAGE_TAG: v0.3.6-claude-2.1.150-r1
+  IMAGE_TAG: v0.3.6-claude-2.1.150-r2
 
 jobs:
   publish:

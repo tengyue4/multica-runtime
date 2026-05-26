@@ -13,7 +13,8 @@ The Codex image is a Multica daemon runtime for self-hosted Multica backends.
 - Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
 - Codex CLI: `@openai/codex@0.133.0`
 - Runtime sandbox package: Alpine `bubblewrap`
-- Published tag: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2`
+- GitHub CLI package: Alpine `github-cli`
+- Published tag: `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3`
 
 The image runs as the non-root `multica` user, keeps `multica` and `codex` on `PATH`, and prepares writable runtime state under:
 
@@ -25,7 +26,7 @@ This repository intentionally does not include Kubernetes manifests yet. Runtime
 #### Build
 
 ```sh
-docker build -f docker/codex.Dockerfile -t ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 .
+docker build -f docker/codex.Dockerfile -t ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 .
 ```
 
 #### Smoke Tests
@@ -33,25 +34,31 @@ docker build -f docker/codex.Dockerfile -t ghcr.io/tengyue4/multica-runtime-code
 Verify the Multica CLI:
 
 ```sh
-docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 version
+docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 version
 ```
 
 Verify the Codex CLI:
 
 ```sh
-docker run --rm --entrypoint codex ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 --version
+docker run --rm --entrypoint codex ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
 ```
 
 Verify the Codex sandbox helper:
 
 ```sh
-docker run --rm --entrypoint bwrap ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2 --version
+docker run --rm --entrypoint bwrap ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
+```
+
+Verify the GitHub CLI:
+
+```sh
+docker run --rm --entrypoint gh ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3 --version
 ```
 
 Verify the entrypoint fails fast when required runtime env is missing:
 
 ```sh
-docker run --rm ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r2
+docker run --rm ghcr.io/tengyue4/multica-runtime-codex:v0.3.6-codex-0.133.0-r3
 ```
 
 #### Runtime Configuration
@@ -81,7 +88,7 @@ multica daemon start --foreground --server-url "$MULTICA_SERVER_URL" --daemon-id
 The GitHub Actions workflow at `.github/workflows/publish-codex-runtime.yml` builds `docker/codex.Dockerfile` for `linux/amd64` and `linux/arm64`, logs in to GHCR with `GITHUB_TOKEN`, and publishes:
 
 ```text
-ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2
+ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3
 ```
 
 The workflow does not publish a moving `latest` tag.
@@ -94,7 +101,8 @@ The Claude image is a Multica daemon runtime for self-hosted Multica backends us
 - Entrypoint: `docker/claude-entrypoint.sh`
 - Base image: `ghcr.io/multica-ai/multica-backend:v0.3.6`
 - Claude Code CLI: `@anthropic-ai/claude-code@2.1.150`
-- Published tag: `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1`
+- GitHub CLI package: Alpine `github-cli`
+- Published tag: `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2`
 
 The image runs as the non-root `multica` user, keeps `multica` and `claude` on `PATH`, and prepares writable runtime state under:
 
@@ -107,13 +115,13 @@ The image runs as the non-root `multica` user, keeps `multica` and `claude` on `
 docker build \
   -f docker/claude.Dockerfile \
   --build-arg CLAUDE_CODE_VERSION=2.1.150 \
-  -t ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 .
+  -t ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 .
 ```
 
 #### Pull
 
 ```sh
-docker pull ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+docker pull ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 #### Smoke Tests
@@ -121,19 +129,25 @@ docker pull ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
 Verify the Multica CLI:
 
 ```sh
-docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 version
+docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 version
 ```
 
 Verify the Claude Code CLI:
 
 ```sh
-docker run --rm --entrypoint claude ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 --version
+docker run --rm --entrypoint claude ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 --version
+```
+
+Verify the GitHub CLI:
+
+```sh
+docker run --rm --entrypoint gh ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 --version
 ```
 
 Verify the entrypoint fails fast when required runtime env is missing:
 
 ```sh
-docker run --rm ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+docker run --rm ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 #### Runtime Configuration
@@ -163,7 +177,7 @@ multica daemon start --foreground --server-url "$MULTICA_SERVER_URL" --daemon-id
 The GitHub Actions workflow at `.github/workflows/publish-claude-runtime.yml` builds `docker/claude.Dockerfile` for `linux/amd64` and `linux/arm64`, logs in to GHCR with `GITHUB_TOKEN`, and publishes:
 
 ```text
-ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 The workflow does not publish a moving `latest` tag.
@@ -177,8 +191,8 @@ Each runtime image has its own publish workflow. Runtime image workflows trigger
 - Do not put secrets in Dockerfiles, build args, workflow logs, README examples, or image labels.
 - Provide runtime tokens and provider API keys only at runtime through the deployment platform.
 - The image runs as a non-root user.
-- Extra packages are limited to shell/runtime basics, Git/SSH, CA certificates, Node/npm for provider CLI installation, and Codex's distro-managed `bubblewrap` sandbox helper.
-- Bundled tools and upstream base images keep their own licenses and terms. Review Multica, OpenAI Codex CLI, Anthropic Claude Code, Alpine, Node.js/npm, Git, OpenSSH, and related package terms before redistribution or production use.
+- Extra packages are limited to shell/runtime basics, Git/SSH, GitHub CLI, CA certificates, Node/npm for provider CLI installation, and Codex's distro-managed `bubblewrap` sandbox helper.
+- Bundled tools and upstream base images keep their own licenses and terms. Review Multica, OpenAI Codex CLI, Anthropic Claude Code, GitHub CLI, Alpine, Node.js/npm, Git, OpenSSH, and related package terms before redistribution or production use.
 
 ## Contributor Guidance
 
