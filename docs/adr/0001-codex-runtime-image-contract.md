@@ -24,6 +24,12 @@ The `r2` image revision keeps the same Multica and Codex versions and adds Alpin
 ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r2
 ```
 
+The `r3` image revision keeps the same Multica and Codex versions and adds Alpine `github-cli` so `gh` is available without baking any GitHub authentication into the image:
+
+```text
+ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3
+```
+
 Use an explicit immutable tag that includes the Multica version, Codex version, and image revision. Do not publish `latest` for the initial scaffold.
 
 The image runs as the non-root `multica` user. Runtime secrets are required at container start through environment variables and are written only to the runtime user's Multica config file.
@@ -34,4 +40,5 @@ The image runs as the non-root `multica` user. Runtime secrets are required at c
 - Operators can see the key runtime compatibility versions from the tag.
 - A future rebuild with the same Multica and Codex versions can increment the trailing image revision.
 - Codex uses the OS-provided `bwrap` binary instead of warning and falling back to its bundled helper.
+- GitHub CLI auth remains runtime/user-managed; the image only provides the `gh` binary.
 - Moving tags and Kubernetes manifests remain out of scope until a later release decision.

@@ -10,7 +10,7 @@ From the repository root:
 docker build \
   -f docker/claude.Dockerfile \
   --build-arg CLAUDE_CODE_VERSION=2.1.150 \
-  -t ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 .
+  -t ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 .
 ```
 
 ## Smoke Test
@@ -18,19 +18,25 @@ docker build \
 Verify the Multica CLI:
 
 ```sh
-docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 version
+docker run --rm --entrypoint multica ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 version
 ```
 
 Verify the Claude Code CLI:
 
 ```sh
-docker run --rm --entrypoint claude ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1 --version
+docker run --rm --entrypoint claude ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 --version
+```
+
+Verify the GitHub CLI:
+
+```sh
+docker run --rm --entrypoint gh ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2 --version
 ```
 
 Verify required environment validation:
 
 ```sh
-docker run --rm ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+docker run --rm ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 The container should exit before daemon startup and report the first missing required environment variable.
@@ -38,7 +44,7 @@ The container should exit before daemon startup and report the first missing req
 ## Pull
 
 ```sh
-docker pull ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+docker pull ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 ## Publish
@@ -48,7 +54,7 @@ The GitHub Actions workflow publishes on pushes to `main` that affect the Claude
 The published image is:
 
 ```text
-ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r1
+ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2
 ```
 
 The workflow uses `GITHUB_TOKEN` for GHCR authentication and does not require runtime secrets.

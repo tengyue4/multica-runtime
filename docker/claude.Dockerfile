@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     bash \
     ca-certificates \
     git \
+    github-cli \
     nodejs \
     npm \
     openssh-client \

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-05-25 - Runtime GitHub CLI Patch
+
+- Added Alpine `github-cli` to both Codex and Claude runtime images so `gh` is available on `PATH`.
+- Bumped the Codex image tag to `ghcr.io/<owner>/multica-runtime-codex:v0.3.6-codex-0.133.0-r3`.
+- Bumped the Claude image tag to `ghcr.io/tengyue4/multica-runtime-claude:v0.3.6-claude-2.1.150-r2`.
+- Updated runtime build, smoke-test, runbook, and ADR documentation for the unauthenticated GitHub CLI installation.
+
 ## 2026-05-25 - Codex Runtime Bubblewrap Patch
 
 - Added Alpine `bubblewrap` to the Codex runtime image so Codex can find the Linux sandbox helper on `PATH`.
